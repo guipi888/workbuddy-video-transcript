@@ -1,0 +1,9 @@
+# State files (generated at runtime)
+.state.json
+
+# Downloaded whisper models
+*.bin
+
+# Temporary audio/video files
+*.wav
+*.mp3
