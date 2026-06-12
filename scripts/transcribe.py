@@ -34,7 +34,7 @@ MODEL_URLS = {
 
 # ── Whisper-cpp functions (macOS preferred) ─────────────────────────────────
 
-def find_whisper_cli() -> str | None:
+def find_whisper_cli():
     """Find the whisper-cli binary. Returns None if not found."""
     candidates = []
     if platform.system() == "Darwin":
