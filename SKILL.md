@@ -1,6 +1,6 @@
 ---
 name: video-transcript
-slug: video-transcript
+slug: guipi-video-transcript
 displayName: 视频文案提取
 description: 从本地视频文件中提取语音文案/字幕。当用户提供视频文件路径（MP4等）要求提取文案、字幕、语音转文字时触发。跨平台支持（macOS/Windows/Linux），完全离线运行。
 version: "1.0.0"
