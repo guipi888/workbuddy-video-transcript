@@ -4,7 +4,8 @@ slug: guipi-video-transcript
 displayName: 视频文案提取
 description: 从本地视频文件中提取语音文案/字幕。当用户提供视频文件路径（MP4等）要求提取文案、字幕、语音转文字时触发。跨平台支持（macOS/Windows/Linux），完全离线运行。
 version: "1.0.0"
-author: 桂皮AI实战
+author: 桂皮
+author_socials: "全网同名（公众号 / 小红书 / 抖音等）：桂皮AI实战 | 知识星球：AI 超级个体"
 agent_created: true
 ---
 
