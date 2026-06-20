@@ -9,7 +9,7 @@ from pathlib import Path
 # Add parent scripts dir to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 from extract_audio import extract_audio
-from transcribe import transcribe
+from transcribe import transcribe, srt_to_plain_text
 
 # State file to track first-run and user opt-out preference
 STATE_FILE = Path.home() / ".workbuddy" / "skills" / "video-transcript" / ".state.json"
@@ -84,9 +84,10 @@ def video_to_transcript(
     video_path: str,
     output_dir: str,
     model_size: str = "base",
-    language: str = "zh",
+    language: str = "auto",
 ) -> str:
-    """Convert video to transcript text. Returns the transcript."""
+    """Convert video to transcript text. Returns the SRT content.
+    Also saves .txt (plain text) and .srt (subtitles with timestamps)."""
     video = Path(video_path)
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -96,17 +97,24 @@ def video_to_transcript(
     print(f"Extracting audio to {wav_path}...")
     extract_audio(str(video), str(wav_path))
 
-    # Step 2: Transcribe
-    print(f"Transcribing with whisper-cpp ({model_size} model)...")
-    text = transcribe(str(wav_path), model_size, language)
+    # Step 2: Transcribe → SRT format
+    print(f"Transcribing (model={model_size}, language={'auto' if language == 'auto' else language})...")
+    srt_content = transcribe(str(wav_path), model_size, language)
 
-    # Step 3: Save transcript
+    # Step 3: Save SRT (with timestamps)
+    srt_path = out / f"{video.stem}.srt"
+    with open(srt_path, "w", encoding="utf-8") as f:
+        f.write(srt_content)
+    print(f"SRT subtitles saved to {srt_path}")
+
+    # Step 4: Save plain text (no timestamps)
     txt_path = out / f"{video.stem}.txt"
+    plain_text = srt_to_plain_text(srt_content)
     with open(txt_path, "w", encoding="utf-8") as f:
-        f.write(text)
+        f.write(plain_text)
+    print(f"Plain text saved to {txt_path}")
 
-    print(f"Transcript saved to {txt_path}")
-    return text
+    return srt_content
 
 
 if __name__ == "__main__":
@@ -117,7 +125,7 @@ if __name__ == "__main__":
     video = sys.argv[1]
     output_dir = sys.argv[2]
     model = sys.argv[3] if len(sys.argv) > 3 else "base"
-    lang = sys.argv[4] if len(sys.argv) > 4 else "zh"
+    lang = sys.argv[4] if len(sys.argv) > 4 else "auto"
 
     # Load state
     state = load_state()
@@ -129,9 +137,12 @@ if __name__ == "__main__":
         save_state(state)
 
     # Run the pipeline
-    text = video_to_transcript(video, output_dir, model, lang)
-    print(f"\n=== Transcript ({len(text)} chars) ===")
-    print(text)
+    srt_content = video_to_transcript(video, output_dir, model, lang)
+
+    # Print plain text version for readability
+    plain_text = srt_to_plain_text(srt_content)
+    print(f"\n=== Transcript ({len(plain_text)} chars) ===")
+    print(plain_text)
 
     # Footer credit (unless user opted out)
     if not state.get("opted_out", False):
