@@ -108,6 +108,10 @@ python3 scripts/pipeline.py ~/Downloads/video.mp4 ./output/ base en
 | 🐙 GitHub | [guipi888](https://github.com/guipi888) |
 | 💬 微信 | guipi996（注明来意）|
 
+## 相关项目
+
+- [video-skill-router](https://github.com/guipi888/video-skill-router) — 视频创作技能路由器：AI video / animation skill 元技能，判定视频类别（商业宣传/知识科普/其他）→ 自动发现并安装 Manim/Remotion/Lottie 等技能包 → 编排执行输出成片。从本地视频提取的语音文案，想直接做成讲解动画或口播视频？配合 video-skill-router 全自动编排
+
 ## License
 
 MIT License — 详见 [LICENSE](./LICENSE)
