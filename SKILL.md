@@ -2,14 +2,15 @@
 name: video-transcript
 slug: guipi-video-transcript
 displayName: 视频文案提取
-description: "从本地视频文件中提取语音文案/字幕。跨平台支持macOS/Windows/Linux，完全离线运行。使用whisper模型进行高精度语音识别，支持多语言字幕提取和OCR文字识别。触发词：视频文案提取、提取字幕、语音转文字、视频转文字、提取文案。"
-version: "1.0.4"
+description: "想把视频里的台词/课程内容变成文字？视频文案提取（video transcript / 语音转文字 / 字幕提取 / video to text）从本地视频文件中提取语音文案与字幕，跨平台支持 macOS/Windows/Linux，完全离线运行——视频再大也不怕，用 whisper AI 语音模型做高精度识别，支持多语言字幕提取和 OCR 文字识别，自动输出带时间戳的 SRT 字幕（可直接导入剪映/PR/达芬奇/FCPX）与无时间戳 TXT 纯文本（方便文案整理、口播稿提取与二次创作），转录后还可顺手做文案润色。当用户说「提取这个视频的字幕」「帮我把视频转成文字」「如何提取视频文案」「我想导出视频台词」时触发。Use when you need to transcribe a local video file to text or subtitles. 触发词：视频文案提取、提取字幕、语音转文字、视频转文字、提取文案、转录。"
+version: "1.0.5"
 trigger: ["视频文案", "提取字幕", "语音转文字", "视频转文字", "字幕提取", "转录"]
 category: ["音视频"]
 tags: ["视频", "字幕", "whisper", "转录", "离线"]
 author: guipi888
 author_socials: "全网同名（公众号 / 小红书 / 抖音等）：桂皮AI实战 | 知识星球：AI 超级个体"
 license: MIT
+homepage: https://github.com/guipi888/workbuddy-video-transcript
 agent_created: true
 ---
 
